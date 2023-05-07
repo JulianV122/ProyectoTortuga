@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ProyectoTortuga">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/ProyectoTortuga.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

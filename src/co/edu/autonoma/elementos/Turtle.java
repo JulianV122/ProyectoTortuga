@@ -49,18 +49,18 @@ public class Turtle extends Sprite {
         double radianes = Math.toRadians(address);
         int newX = x - (int) (distancia * Math.cos(radianes));
         int newY = y - (int) (distancia * Math.sin(radianes));
-
         x = newX;
         y = newY;
+        drawable.redraw();
     }
 
     public void back(int distancia) {
         double radianes = Math.toRadians(address);
         int newX = x + (int) (distancia * Math.cos(radianes));
         int newY = y + (int) (distancia * Math.sin(radianes));
-
         x = newX;
         y = newY;
+        drawable.redraw();
     }
     
     public void drawImage(Graphics g) {
