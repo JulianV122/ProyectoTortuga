@@ -17,10 +17,10 @@ public abstract class Sprite {
     protected int height;
     
     public Sprite(int x, int y, int width, int height){
-        setX(x);
-        setY(y);
-        setWidth(width);
-        setHeight(height);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
     
     public abstract void draw (Graphics g);

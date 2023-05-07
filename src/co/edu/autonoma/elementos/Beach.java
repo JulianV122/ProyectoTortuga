@@ -11,12 +11,13 @@ import java.awt.Graphics;
  *
  * @author Julian
  */
-public class Beach extends Sprite {
+public class Beach extends Sprite implements Drawable{
+    private Drawable drawable;
     private Turtle turtle;
 
     public Beach(int width, int height) {
         super(0, 0, width, height);
-        turtle = new Turtle(10, 10);
+        turtle = new Turtle(50, 20);
     }
     
     
@@ -24,7 +25,16 @@ public class Beach extends Sprite {
     public void draw(Graphics g) {
         g.setColor(Color.YELLOW);
         g.fillRect(x, y, width, height);
+        turtle.drawImage(g);
         turtle.draw(g);
     }
-    
+
+    @Override
+    public void redraw() {
+        drawable.redraw();
+    }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
+    }
 }

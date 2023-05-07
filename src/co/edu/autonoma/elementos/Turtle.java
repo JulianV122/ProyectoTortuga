@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import javax.imageio.ImageIO;
@@ -17,25 +18,55 @@ import javax.imageio.ImageIO;
  * @author Julian
  */
 public class Turtle extends Sprite {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+    public int address;
+    public Color color;
     private BufferedImage image;
+    private Drawable drawable;
 
     public Turtle(int x, int y) {
         super(x, y, 24, 24);
     }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
+    }
+
+    public void turnLeft(int angulo) {
+        address -= angulo;
+        if (address < 0) {
+            address += 360;
+        }
+    }
+
+    public void turnRight(int angulo) {
+        address += angulo;
+        if (address >= 360) {
+            address -= 360;
+        }
+    }
+
+    public void retroceder(int distancia) {
+        double radianes = Math.toRadians(address);
+        int newX = x - (int) (distancia * Math.cos(radianes));
+        int newY = y - (int) (distancia * Math.sin(radianes));
+
+        x = newX;
+        y = newY;
+    }
+
+    public void back(int distancia) {
+        double radianes = Math.toRadians(address);
+        int newX = x + (int) (distancia * Math.cos(radianes));
+        int newY = y + (int) (distancia * Math.sin(radianes));
+
+        x = newX;
+        y = newY;
+    }
     
-    public void forward (int distance){
-        
-    } 
-    
-    
-    public void drawImage(Graphics g, ImageObserver parent) {
+    public void drawImage(Graphics g) {
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResource("src\\co\\edu\\autonoma\\Resources\\turtle.png")));
-            g.drawImage(image, 0, 0, 64, 64, parent);
+            image = ImageIO.read(new File("src\\co\\edu\\autonoma\\Resources\\turtle.png"));
+            g.drawImage(image, 0, 0, 64, 64, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +74,7 @@ public class Turtle extends Sprite {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.GREEN);
+        g.setColor(color);
         g.fillRect(x, y, width, height);
     }
 }

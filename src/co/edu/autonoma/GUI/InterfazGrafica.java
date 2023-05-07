@@ -5,13 +5,15 @@
 package co.edu.autonoma.GUI;
 
 import co.edu.autonoma.elementos.Beach;
+import co.edu.autonoma.elementos.Drawable;
+
 import java.awt.Graphics;
 
 /**
  *
  * @author Julian
  */
-public class InterfazGrafica extends javax.swing.JFrame {
+public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     private Beach beach;
     /**
      * Creates new form Interfaz
@@ -22,6 +24,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
     
     public void setBeach(Beach beach){
         this.beach = beach;
+        beach.setDrawable(this);
     }
     
     @Override
@@ -65,6 +68,11 @@ public class InterfazGrafica extends javax.swing.JFrame {
         interfaz.setBeach(beach);
         interfaz.setTitle("Turtle Game");
         interfaz.setVisible(true);
+    }
+
+    @Override
+    public void redraw() {
+        repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
