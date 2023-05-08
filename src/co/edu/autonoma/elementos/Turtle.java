@@ -7,10 +7,8 @@ package co.edu.autonoma.elementos;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 import javax.imageio.ImageIO;
 
 /**
@@ -22,9 +20,13 @@ public class Turtle extends Sprite {
     public Color color;
     private BufferedImage image;
     private Drawable drawable;
+    private int xaux;
+    private int yaux;
 
     public Turtle(int x, int y) {
         super(x, y, 24, 24);
+        xaux= x;
+        yaux=y;
     }
 
     public void setDrawable(Drawable drawable) {
@@ -45,19 +47,23 @@ public class Turtle extends Sprite {
         }
     }
 
-    public void retroceder(int distancia) {
+    public void backward(int distancia) {
         double radianes = Math.toRadians(address);
         int newX = x - (int) (distancia * Math.cos(radianes));
         int newY = y - (int) (distancia * Math.sin(radianes));
+        xaux = x;
+        yaux = y;
         x = newX;
         y = newY;
         drawable.redraw();
     }
 
-    public void back(int distancia) {
+    public void forward (int distancia) {
         double radianes = Math.toRadians(address);
         int newX = x + (int) (distancia * Math.cos(radianes));
         int newY = y + (int) (distancia * Math.sin(radianes));
+        xaux = x;
+        yaux = y;
         x = newX;
         y = newY;
         drawable.redraw();
@@ -66,15 +72,32 @@ public class Turtle extends Sprite {
     public void drawImage(Graphics g) {
         try {
             image = ImageIO.read(new File("src\\co\\edu\\autonoma\\Resources\\turtle.png"));
-            g.drawImage(image, 0, 0, 64, 64, null);
+            g.drawImage(image, 50, 80, 64, 64, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
+    public void reset(){
+        
+    }
+    
+    public void home(){
+        
+    }
 
+    public Color changeColor(String new_color){
+        Color color=new Color(0,0,0);
+        if (new_color.equals("BLACK")){
+            color = Color.BLACK;
+        }
+        return color;
+    }
+    
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
         g.fillRect(x, y, width, height);
+        g.drawLine(xaux, yaux, x, y);
     }
 }

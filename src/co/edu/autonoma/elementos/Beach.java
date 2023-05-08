@@ -23,7 +23,8 @@ public class Beach extends Sprite implements Drawable{
     
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
+        Color color = new Color(255, 202, 40);
+        g.setColor(color);
         g.fillRect(x, y, width, height);
         turtle.drawImage(g);
         turtle.draw(g);
