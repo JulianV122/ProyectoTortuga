@@ -4,7 +4,11 @@
  */
 package co.edu.autonoma.elementos;
 
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
@@ -15,11 +19,39 @@ public class Manager {
     private RandomAccessFile archive;
     private ArrayList<String> instructions;
 
-    public void load() {}
+    public Manager() throws FileNotFoundException {
+        try {
+            this.archive = new RandomAccessFile("src\\turtle\\resources\\rectángulo.logo", "r");
+        } catch (Exception e) {
+            this.archive = new RandomAccessFile("src\\turtle\\resources\\rectángulo.logo", "rw");
+        }
+        this.instructions = new ArrayList<>();
+    }
+
+    public void load() throws FileNotFoundException {
+        try {
+            if(this.archive.length() != 0) {
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void save() {}
 
-    public void read() {}
+    public void read() {
+        Charset charset = StandardCharsets.UTF_8;
+
+        try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException x) {
+            System.err.format("IOException: %s%n", x);
+        }
+    }
 
     public void extractData() {}
 }

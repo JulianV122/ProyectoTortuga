@@ -20,7 +20,6 @@ public class Beach extends Sprite implements Drawable{
         turtle = new Turtle(50, 20);
     }
     
-    
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.YELLOW);

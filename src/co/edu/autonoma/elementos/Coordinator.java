@@ -10,6 +10,9 @@ package co.edu.autonoma.elementos;
  */
 public class Coordinator {
     public String processdata(String instruction){
+        String[] partes = instruction.split(" ");
+        instruction = partes[0];
+        int palabra2 = Integer.parseInt(partes[1]);
         return null;
     }
 

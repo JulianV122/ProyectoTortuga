@@ -22,6 +22,9 @@ public class Turtle extends Sprite {
     public Color color;
     private BufferedImage image;
     private Drawable drawable;
+    public Graphics g;
+    public int x2;
+    public int y2;
 
     public Turtle(int x, int y) {
         super(x, y, 24, 24);
@@ -49,18 +52,20 @@ public class Turtle extends Sprite {
         double radianes = Math.toRadians(address);
         int newX = x - (int) (distancia * Math.cos(radianes));
         int newY = y - (int) (distancia * Math.sin(radianes));
-        x = newX;
-        y = newY;
-        drawable.redraw();
+        x = x2;
+        y = y2;
+        x2 = newX;
+        y2 = newY;
     }
 
     public void back(int distancia) {
         double radianes = Math.toRadians(address);
         int newX = x + (int) (distancia * Math.cos(radianes));
         int newY = y + (int) (distancia * Math.sin(radianes));
-        x = newX;
-        y = newY;
-        drawable.redraw();
+        x = x2;
+        y = y2;
+        x2 = newX;
+        y2 = newY;
     }
     
     public void drawImage(Graphics g) {
@@ -74,7 +79,7 @@ public class Turtle extends Sprite {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
+        this.g.setColor(color);
+        this.g.drawLine(x, y, x2, y2);
     }
 }
