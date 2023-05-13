@@ -55,7 +55,7 @@ public class Coordinator {
             turtle.home();
         }
         if (instruction.equals("SAVE") || instruction.equals("S")){
-            turtle.changeColor(color);
+            
         }
     }
 
