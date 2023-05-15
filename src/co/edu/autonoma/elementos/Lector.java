@@ -18,15 +18,16 @@ import java.util.ArrayList;
  *
  * @author Julian
  */
-public class Manager {
+public class Lector {
     private RandomAccessFile archive;
     private ArrayList<String> instructions;
+    private Coordinator coordinador;
     
-    public Manager(RandomAccessFile archive) throws FileNotFoundException {
+    public Lector(RandomAccessFile archive) throws FileNotFoundException {
         try {
-            this.archive = new RandomAccessFile("src\turtle\resources\rectángulo.logo", "r");
+            this.archive = new RandomAccessFile("src\\co\\edu\\autonoma\\elementos\\Logo.txt", "r");
         } catch (Exception e) {
-            this.archive = new RandomAccessFile("src\turtle\resources\rectángulo.logo", "rw");
+            this.archive = new RandomAccessFile("src\\co\\edu\\autonoma\\elementos\\Logo.txt", "rw");
         }
     }
 
@@ -44,11 +45,11 @@ public class Manager {
 
     public void read() {
         Charset charset = StandardCharsets.UTF_8;
-        
         try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
+                coordinador.proccessData(line);
             }
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
@@ -56,7 +57,7 @@ public class Manager {
     }
     
     public void read(String text){
-        
+        coordinador.proccessData(text);
     }
     
 

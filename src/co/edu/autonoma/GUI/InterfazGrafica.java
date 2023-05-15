@@ -6,6 +6,7 @@ package co.edu.autonoma.GUI;
 
 import co.edu.autonoma.elementos.Beach;
 import co.edu.autonoma.elementos.Drawable;
+import co.edu.autonoma.elementos.Lector;
 
 import java.awt.Graphics;
 
@@ -15,6 +16,7 @@ import java.awt.Graphics;
  */
 public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     private Beach beach;
+    private Lector lector;
     /**
      * Creates new form Interfaz
      */
@@ -68,6 +70,11 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
         jScrollPane1.setViewportView(InstructionsList);
 
         btIniciar.setText("Iniciar");
+        btIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btIniciarActionPerformed(evt);
+            }
+        });
 
         btLimpiar.setText("Limpiar");
 
@@ -114,6 +121,11 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     private void InstructionstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstructionstxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InstructionstxtActionPerformed
+
+    private void btIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniciarActionPerformed
+        String data = Instructionstxt.getText();
+        lector.read(data);
+    }//GEN-LAST:event_btIniciarActionPerformed
 
      
     /**

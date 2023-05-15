@@ -9,5 +9,6 @@ package co.edu.autonoma.elementos;
  * @author Julian
  */
 public class LeftTurn extends Instruccion {
+    private int degree;
     
 }

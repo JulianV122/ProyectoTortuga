@@ -29,6 +29,7 @@ public class Turtle extends Sprite {
         yaux=y;
     }
 
+    
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
     }
@@ -58,7 +59,7 @@ public class Turtle extends Sprite {
         drawable.redraw();
     }
 
-    public void forward (int distancia) {
+    public void forward (int distancia,Instruccion ins) {
         double radianes = Math.toRadians(address);
         int newX = x + (int) (distancia * Math.cos(radianes));
         int newY = y + (int) (distancia * Math.sin(radianes));

@@ -4,7 +4,6 @@
  */
 package co.edu.autonoma.elementos;
 
-import java.awt.Color;
 
 /**
  *
@@ -12,12 +11,11 @@ import java.awt.Color;
  */
 public class Coordinator {
     private Turtle turtle;
+    private Instruccion instruccion;
 
     public Coordinator() {
     }
     
-    
-
     public void repeat(int amount, String instruction){}
 
     public void proccessData(String instruction){
@@ -34,19 +32,19 @@ public class Coordinator {
         }
         
         if (instruction.equals("FORWARD") || instruction.equals("FD")){
-            turtle.forward(distance);
+            instruccion = new Forward();
         }
         if (instruction.equals("BACKWARD") || instruction.equals("BD")){
-            turtle.backward(distance);
+            instruccion = new Backward();
         }
         if (instruction.equals("RIGHTTURN") || instruction.equals("RT")){
-            turtle.turnRight(distance);
+            instruccion = new RightTurn();
         }
         if (instruction.equals("LEFTTURN") || instruction.equals("LT")){
-            turtle.turnLeft(distance);
+            instruccion = new LeftTurn();
         }
         if (instruction.equals("SETCOLOR") || instruction.equals("SC")){
-            turtle.changeColor(color);
+            instruccion = new SetColor();
         }
         if (instruction.equals("RESET") || instruction.equals("R")){
             turtle.reset();

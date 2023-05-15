@@ -8,6 +8,6 @@ package co.edu.autonoma.elementos;
  *
  * @author Julian
  */
-public class Instruccion {
+public abstract class Instruccion {
     
 }
