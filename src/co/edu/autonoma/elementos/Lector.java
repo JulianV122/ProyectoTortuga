@@ -31,7 +31,7 @@ public class Lector {
         }
     }
 
-    public void load() throws FileNotFoundException, IOException {
+    public void load() {
         try {
             if(this.archive.length() != 0) {
                 read();
@@ -46,7 +46,7 @@ public class Lector {
     public void read() {
         Charset charset = StandardCharsets.UTF_8;
         try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 coordinador.proccessData(line);

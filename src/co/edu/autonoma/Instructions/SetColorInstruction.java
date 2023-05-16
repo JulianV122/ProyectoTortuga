@@ -15,49 +15,18 @@ public class SetColorInstruction extends Instruction {
     
     public void setColor(String lineColor){
         lineColor = lineColor.toUpperCase();
-        switch (lineColor){
-            case "BLACK":
-                color = Color.BLACK;
-        }
-        switch (lineColor){
-            case "BLUE":
-                color = Color.BLUE;
-        }
-        switch (lineColor){
-            case "CYAN":
-                color = Color.CYAN;
-        }
-        switch (lineColor){
-            case "GRAY":
-                color = Color.GRAY;
-        }
-        switch (lineColor){
-            case "GREEN":
-                color = Color.GREEN;
-        }
-        switch (lineColor){
-            case "MAGENTA":
-                color = Color.MAGENTA;
-        }
-        switch (lineColor){
-            case "ORANGE":
-                color = Color.ORANGE;
-        }
-        switch (lineColor){
-            case "PINK":
-                color = Color.PINK;
-        }
-        switch (lineColor){
-            case "RED":
-                color = Color.RED;
-        }
-        switch (lineColor){
-            case "WHITE":
-                color = Color.WHITE;
-        }
-        switch (lineColor){
-            case "YELLOW":
-                color = Color.YELLOW;
+        switch (lineColor) {
+            case "BLACK" -> color = Color.BLACK;
+            case "BLUE" -> color = Color.BLUE;
+            case "CYAN" -> color = Color.CYAN;
+            case "GRAY" -> color = Color.GRAY;
+            case "GREEN" -> color = Color.GREEN;
+            case "MAGENTA" -> color = Color.MAGENTA;
+            case "ORANGE" -> color = Color.ORANGE;
+            case "PINK" -> color = Color.PINK;
+            case "RED" -> color = Color.RED;
+            case "WHITE" -> color = Color.WHITE;
+            case "YELLOW" -> color = Color.YELLOW;
         }
     }
     
