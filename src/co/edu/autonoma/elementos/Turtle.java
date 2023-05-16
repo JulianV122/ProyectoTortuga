@@ -4,6 +4,9 @@
  */
 package co.edu.autonoma.elementos;
 
+import co.edu.autonoma.Instructions.BackwardInstruction;
+import co.edu.autonoma.Instructions.ForwardInstruction;
+import co.edu.autonoma.Instructions.SetColorInstruction;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -22,11 +25,13 @@ public class Turtle extends Sprite {
     private Drawable drawable;
     private int xaux;
     private int yaux;
+    private TurtleLine turtleLine;
 
     public Turtle(int x, int y) {
         super(x, y, 24, 24);
         xaux= x;
         yaux=y;
+        turtleLine = new TurtleLine();
     }
 
     
@@ -48,10 +53,10 @@ public class Turtle extends Sprite {
         }
     }
 
-    public void backward(int distancia) {
+    public void backward(BackwardInstruction backward) {
         double radianes = Math.toRadians(address);
-        int newX = x - (int) (distancia * Math.cos(radianes));
-        int newY = y - (int) (distancia * Math.sin(radianes));
+        int newX = x - (int) (backward.getDistance()* Math.cos(radianes));
+        int newY = y - (int) (backward.getDistance() * Math.sin(radianes));
         xaux = x;
         yaux = y;
         x = newX;
@@ -59,15 +64,19 @@ public class Turtle extends Sprite {
         drawable.redraw();
     }
 
-    public void forward (int distancia,Instruccion ins) {
+    public void forward (ForwardInstruction forward) {
         double radianes = Math.toRadians(address);
-        int newX = x + (int) (distancia * Math.cos(radianes));
-        int newY = y + (int) (distancia * Math.sin(radianes));
+        int newX = x + (int) (forward.getDistance() * Math.cos(radianes));
+        int newY = y + (int) (forward.getDistance() * Math.sin(radianes));
         xaux = x;
         yaux = y;
         x = newX;
         y = newY;
         drawable.redraw();
+    }
+    
+    public void setColor(SetColorInstruction SC){
+        turtleLine.setColor(SC.getColor());
     }
     
     public void drawImage(Graphics g) {
@@ -87,18 +96,16 @@ public class Turtle extends Sprite {
         
     }
 
-    public Color changeColor(String new_color){
-        Color color=new Color(0,0,0);
-        if (new_color.equals("BLACK")){
-            color = Color.BLACK;
-        }
-        return color;
-    }
     
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
         g.fillRect(x, y, width, height);
         g.drawLine(xaux, yaux, x, y);
+    }
+
+    @Override
+    public void redraw() {
+        drawable.redraw();
     }
 }

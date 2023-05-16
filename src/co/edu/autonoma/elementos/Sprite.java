@@ -10,11 +10,12 @@ import java.awt.Graphics;
  *
  * @author Julian
  */
-public abstract class Sprite {
+public abstract class Sprite implements Drawable{
     protected int x;
     protected int y;
     protected int width;
     protected int height;
+    protected Drawable drawable;
     
     public Sprite(int x, int y, int width, int height){
         this.x = x;

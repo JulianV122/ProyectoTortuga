@@ -4,17 +4,21 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Coordinator.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Resources/turtle.png</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Reset.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Instruccion.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Forward.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/SetColor.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Backward.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Home.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Sprite.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/ResetInstruction.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Turtle.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Drawable.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Lector.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/GUI/InterfazGrafica.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/LeftTurn.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/SetColorInstruction.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Escritor.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/RightTurn.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/RightTurnInstruction.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Resources/turtle.png</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/LeftTurnInstruction.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/BackwardInstruction.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/HomeInstruction.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/Instruction.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/ForwardInstruction.java</file>
         </group>
     </open-files>
 </project-private>

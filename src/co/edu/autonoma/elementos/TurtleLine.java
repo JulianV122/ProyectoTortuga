@@ -4,10 +4,16 @@
  */
 package co.edu.autonoma.elementos;
 
+import java.awt.Color;
+
 /**
  *
  * @author Julian
  */
-public abstract class Instruccion {
+public class TurtleLine {
+    private Color color;
     
+    public void setColor(Color color){
+        this.color = color;
+    }
 }

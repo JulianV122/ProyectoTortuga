@@ -4,6 +4,14 @@
  */
 package co.edu.autonoma.elementos;
 
+import co.edu.autonoma.Instructions.BackwardInstruction;
+import co.edu.autonoma.Instructions.SetColorInstruction;
+import co.edu.autonoma.Instructions.RightTurnInstruction;
+import co.edu.autonoma.Instructions.LeftTurnInstruction;
+import co.edu.autonoma.Instructions.Instruction;
+import co.edu.autonoma.Instructions.ForwardInstruction;
+import java.awt.Graphics;
+
 
 /**
  *
@@ -11,9 +19,11 @@ package co.edu.autonoma.elementos;
  */
 public class Coordinator {
     private Turtle turtle;
-    private Instruccion instruccion;
+    private Instruction instruccion;
+    
 
     public Coordinator() {
+        turtle = new  Turtle(50, 20);
     }
     
     public void repeat(int amount, String instruction){}
@@ -32,19 +42,25 @@ public class Coordinator {
         }
         
         if (instruction.equals("FORWARD") || instruction.equals("FD")){
-            instruccion = new Forward();
+            instruccion = new ForwardInstruction();
+            ((ForwardInstruction)instruccion).setDistance(distance);
+            turtle.forward((ForwardInstruction)instruccion);
         }
         if (instruction.equals("BACKWARD") || instruction.equals("BD")){
-            instruccion = new Backward();
+            instruccion = new BackwardInstruction();
+            ((BackwardInstruction)instruccion).setDistance(distance);
+            turtle.backward((BackwardInstruction)instruccion);
         }
         if (instruction.equals("RIGHTTURN") || instruction.equals("RT")){
-            instruccion = new RightTurn();
+            instruccion = new RightTurnInstruction();
         }
         if (instruction.equals("LEFTTURN") || instruction.equals("LT")){
-            instruccion = new LeftTurn();
+            instruccion = new LeftTurnInstruction();
         }
         if (instruction.equals("SETCOLOR") || instruction.equals("SC")){
-            instruccion = new SetColor();
+            instruccion = new SetColorInstruction();
+            ((SetColorInstruction)instruccion).setColor(color);
+            turtle.setColor((SetColorInstruction)instruccion);
         }
         if (instruction.equals("RESET") || instruction.equals("R")){
             turtle.reset();
@@ -60,6 +76,12 @@ public class Coordinator {
     public void setTurtle(Turtle turtle) {
         this.turtle = turtle;
     }
+    
+    public void draw(Graphics g){
+        turtle.drawImage(g);
+        turtle.draw(g);
+    }
+
     
     
 }

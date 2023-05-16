@@ -4,7 +4,7 @@
  */
 package co.edu.autonoma.GUI;
 
-import co.edu.autonoma.elementos.Beach;
+import co.edu.autonoma.elementos.Coordinator;
 import co.edu.autonoma.elementos.Drawable;
 import co.edu.autonoma.elementos.Lector;
 
@@ -15,7 +15,7 @@ import java.awt.Graphics;
  * @author Julian
  */
 public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
-    private Beach beach;
+    private Coordinator coordinator;
     private Lector lector;
     /**
      * Creates new form Interfaz
@@ -24,14 +24,13 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
         initComponents();
     }
     
-    public void setBeach(Beach beach){
-        this.beach = beach;
-        beach.setDrawable(this);
+    public void setCoordinator(Coordinator coordinator){
+        this.coordinator = coordinator;
     }
     
     @Override
     public void paint(Graphics g) {
-        beach.draw(g);
+        coordinator.draw(g);
     }
 
     /**
@@ -133,9 +132,10 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
      */
     public static void main(String args[]) {
         InterfazGrafica interfaz = new InterfazGrafica();
-        Beach beach = new Beach(interfaz.getWidth(),interfaz.getHeight());
+        //Beach beach = new Beach(interfaz.getWidth(),interfaz.getHeight());
+        Coordinator coordinator = new Coordinator();
         
-        interfaz.setBeach(beach);
+        interfaz.setCoordinator(coordinator);
         interfaz.setTitle("Turtle Game");
         interfaz.setVisible(true);
     }
