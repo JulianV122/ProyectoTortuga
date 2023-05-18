@@ -11,9 +11,8 @@
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Lector.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/GUI/InterfazGrafica.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/SetColorInstruction.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/Escritor.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/RightTurnInstruction.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Resources/turtle.png</file>
+            <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/elementos/TurtleLine.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/LeftTurnInstruction.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/BackwardInstruction.java</file>
             <file>file:/D:/Documents/NetBeansProjects/ProyectoTortuga/src/co/edu/autonoma/Instructions/HomeInstruction.java</file>

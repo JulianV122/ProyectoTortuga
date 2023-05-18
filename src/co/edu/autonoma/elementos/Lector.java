@@ -20,10 +20,22 @@ import java.util.ArrayList;
  */
 public class Lector {
     private RandomAccessFile archive;
-    private ArrayList<String> instructions;
-    private Coordinator coordinador;
     
-    public Lector(RandomAccessFile archive) throws FileNotFoundException {
+    public Lector() {
+    }
+
+//    public void load() {
+//        try {
+//            if(this.archive.length() != 0) {
+//                loadArchive();
+//                read();
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+    
+    public void loadArchive() throws FileNotFoundException {
         try {
             this.archive = new RandomAccessFile("src\\co\\edu\\autonoma\\elementos\\Logo.txt", "r");
         } catch (Exception e) {
@@ -31,34 +43,24 @@ public class Lector {
         }
     }
 
-    public void load() {
-        try {
-            if(this.archive.length() != 0) {
-                read();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void save() {}
 
-    public void read() {
-        Charset charset = StandardCharsets.UTF_8;
-        try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                coordinador.proccessData(line);
-            }
-        } catch (IOException x) {
-            System.err.format("IOException: %s%n", x);
-        }
-    }
+//    public void read() {
+//        Charset charset = StandardCharsets.UTF_8;
+//        try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                System.out.println(line);
+//                coordinador.proccessData(line);
+//            }
+//        } catch (IOException x) {
+//            System.err.format("IOException: %s%n", x);
+//        }
+//    }
     
-    public void read(String text){
-        coordinador.proccessData(text);
-    }
+//    public void read(String text){
+//        coordinador.proccessData(text);
+//    }
     
 
     public void extractData() {}

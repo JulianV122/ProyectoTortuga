@@ -18,10 +18,10 @@ public abstract class Sprite implements Drawable{
     protected Drawable drawable;
     
     public Sprite(int x, int y, int width, int height){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        setX(x);
+        setY(y);
+        setWidth(width);
+        setHeight(height);
     }
     
     public abstract void draw (Graphics g);
@@ -56,6 +56,10 @@ public abstract class Sprite implements Drawable{
 
     public void setHeight(int height) {
         this.height = height;
+    }
+    
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
     }
 
 }

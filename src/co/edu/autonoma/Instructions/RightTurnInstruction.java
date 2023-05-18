@@ -4,10 +4,28 @@
  */
 package co.edu.autonoma.Instructions;
 
+import co.edu.autonoma.elementos.Turtle;
+
+
 /**
  *
  * @author Julian
  */
 public class RightTurnInstruction extends Instruction {
     private int degree;
+    
+    public void setDegree(int degree){
+        this.degree = degree;
+    }
+    
+    public int getDegree(){
+        return this.degree;
+    }
+
+    @Override
+    public void execute(Turtle turtle) {
+        if (degree > 0) {
+            turtle.setDirection(degree+turtle.getDirection());
+        }
+    }
 }

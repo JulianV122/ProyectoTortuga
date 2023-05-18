@@ -4,6 +4,7 @@
  */
 package co.edu.autonoma.Instructions;
 
+import co.edu.autonoma.elementos.Turtle;
 import java.awt.Color;
 
 /**
@@ -32,5 +33,10 @@ public class SetColorInstruction extends Instruction {
     
     public Color getColor(){
         return color;
+    }
+
+    @Override
+    public void execute(Turtle turtle) {
+        turtle.color = color;
     }
 }

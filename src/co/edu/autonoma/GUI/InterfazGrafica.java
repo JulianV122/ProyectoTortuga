@@ -6,9 +6,7 @@ package co.edu.autonoma.GUI;
 
 import co.edu.autonoma.elementos.Coordinator;
 import co.edu.autonoma.elementos.Drawable;
-import co.edu.autonoma.elementos.Lector;
 import java.awt.BorderLayout;
-
 import java.awt.Graphics;
 
 /**
@@ -17,7 +15,6 @@ import java.awt.Graphics;
  */
 public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     private Coordinator coordinator;
-    private Lector lector;
     /**
      * Creates new form Interfaz
      */
@@ -34,7 +31,8 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     
     @Override
     public void paint(Graphics g) {
-        coordinator.draw(g);
+        super.paint(g);
+        coordinator.draw(g); 
     }
 
     /**
@@ -50,7 +48,7 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
         btIniciar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        InstructionsList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -75,13 +73,18 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
         });
 
         btLimpiar.setText("Limpiar");
+        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimpiarActionPerformed(evt);
+            }
+        });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        InstructionsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(InstructionsList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,18 +103,17 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(409, 409, 409)
-                        .addComponent(Instructionstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Instructionstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btIniciar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(btLimpiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btLimpiar)))
                 .addContainerGap())
         );
 
@@ -128,8 +130,14 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
 
     private void btIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniciarActionPerformed
         String data = Instructionstxt.getText();
-        lector.read(data);
+        coordinator.proccessData(data);
+        
+        repaint();
     }//GEN-LAST:event_btIniciarActionPerformed
+
+    private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+        Instructionstxt.setText("");
+    }//GEN-LAST:event_btLimpiarActionPerformed
 
      
     /**
@@ -138,13 +146,11 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     public static void main(String args[]) {
         InterfazGrafica interfaz = new InterfazGrafica();
         //Beach beach = new Beach(interfaz.getWidth(),interfaz.getHeight());
-        Coordinator coordinator = new Coordinator();
+        Coordinator coordinator = new Coordinator(interfaz.getWidth(),interfaz.getHeight());
         
         interfaz.setCoordinator(coordinator);
         interfaz.setTitle("Turtle Game");
-        
         interfaz.setVisible(true);
-        interfaz.pack();
     }
 
     @Override
@@ -153,10 +159,10 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> InstructionsList;
     private javax.swing.JTextField Instructionstxt;
     private javax.swing.JButton btIniciar;
     private javax.swing.JButton btLimpiar;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

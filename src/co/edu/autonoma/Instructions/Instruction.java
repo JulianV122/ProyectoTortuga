@@ -4,10 +4,21 @@
  */
 package co.edu.autonoma.Instructions;
 
+import co.edu.autonoma.elementos.Turtle;
+import java.util.ArrayList;
+
 /**
  *
  * @author Julian
  */
 public abstract class Instruction {
+    private ArrayList instructionHistory;
+
+    public Instruction() {
+        this.instructionHistory = new ArrayList();
+    }
+    
+    public abstract void execute(Turtle turtle);
+    
     
 }
