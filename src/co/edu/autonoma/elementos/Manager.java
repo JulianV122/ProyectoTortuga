@@ -38,13 +38,11 @@ public class Manager {
         }
     }
 
-    public void save() {}
-
     public void read() {
         Charset charset = StandardCharsets.UTF_8;
 
         try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
@@ -53,5 +51,4 @@ public class Manager {
         }
     }
 
-    public void extractData() {}
 }

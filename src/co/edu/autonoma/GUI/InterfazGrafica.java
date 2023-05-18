@@ -4,32 +4,40 @@
  */
 package co.edu.autonoma.GUI;
 
-import co.edu.autonoma.elementos.Beach;
+import co.edu.autonoma.elementos.Commander;
 import co.edu.autonoma.elementos.Drawable;
 
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Julian
  */
 public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
-    private Beach beach;
+    public Commander comander;
     /**
      * Creates new form Interfaz
      */
     public InterfazGrafica() {
         initComponents();
     }
-    
-    public void setBeach(Beach beach){
-        this.beach = beach;
-        beach.setDrawable(this);
+
+    public void setComander(Commander comander) {
+        this.comander = comander;
+        comander.setDrawable(this);
     }
     
+    
+
     @Override
     public void paint(Graphics g) {
-        beach.draw(g);
+        comander.draw(g);
     }
 
     /**
@@ -41,33 +49,103 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TFrecibircomando = new javax.swing.JTextField();
+        Bejecutar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Lhistorialcomandos = new javax.swing.JList<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        TFrecibircomando.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFrecibircomandoActionPerformed(evt);
+            }
+        });
+
+        Bejecutar.setText("Ejecutar");
+        Bejecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    BejecutarActionPerformed(evt);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        Lhistorialcomandos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LhistorialcomandosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Lhistorialcomandos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TFrecibircomando, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Bejecutar)))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Bejecutar)
+                    .addComponent(TFrecibircomando, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void TFrecibircomandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFrecibircomandoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFrecibircomandoActionPerformed
+
+    private void BejecutarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_BejecutarActionPerformed
+        String commando = TFrecibircomando.getText();
+        TFrecibircomando.setText("");
+        comander.coordinatoraction(commando);
+        ArrayList<String> elementos = comander.getRecord().getHistory();
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (String elemento : elementos) {
+            model.addElement(elemento);
+        }
+        Lhistorialcomandos.setModel(model);
+        Lhistorialcomandos.updateUI();
+        
+    }//GEN-LAST:event_BejecutarActionPerformed
+
+    private void LhistorialcomandosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LhistorialcomandosMouseClicked
+        // TODO add your handling code here:
+        String event =Lhistorialcomandos.getSelectedValue();
+        TFrecibircomando.setText(event);
+    }//GEN-LAST:event_LhistorialcomandosMouseClicked
+
      
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws FileNotFoundException {
+        Commander commander = new Commander();
         InterfazGrafica interfaz = new InterfazGrafica();
-        Beach beach = new Beach(interfaz.getWidth(),interfaz.getHeight());
-        
-        interfaz.setBeach(beach);
+        interfaz.setBounds(0, 0, 450, 400);
+        interfaz.setComander(commander);
         interfaz.setTitle("Turtle Game");
         interfaz.setVisible(true);
+        interfaz.revalidate();
     }
 
     @Override
@@ -76,5 +154,9 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bejecutar;
+    private javax.swing.JList<String> Lhistorialcomandos;
+    private javax.swing.JTextField TFrecibircomando;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

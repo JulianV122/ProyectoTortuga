@@ -4,82 +4,94 @@
  */
 package co.edu.autonoma.elementos;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import co.edu.autonoma.Command.TurtleCommand;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 /**
  *
- * @author Julian
+ * @author victor
  */
-public class Turtle extends Sprite {
+
+public class Turtle {
+    public Point actualPoint;
+    public Point pastPoint;
+    public int width;
+    public int height;
     public int address;
     public Color color;
     private BufferedImage image;
     private Drawable drawable;
-    public Graphics g;
-    public int x2;
-    public int y2;
+    private ArrayList<Line> lines; // Lista para almacenar las líneas
 
-    public Turtle(int x, int y) {
-        super(x, y, 24, 24);
+    public Turtle() {
+        this.actualPoint = new Point(200, 200);
+        this.pastPoint = new Point(200, 200);
+        this.width = 64;
+        this.height = 64;
+        this.address = 0;
+        this.color = Color.BLACK;
+        this.lines = new ArrayList<>();
+    }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public Point getActualPoint() {
+        return actualPoint;
+    }
+
+    public Point getPastPoint() {
+        return pastPoint;
     }
 
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
     }
 
-    public void turnLeft(int angulo) {
-        address -= angulo;
-        if (address < 0) {
-            address += 360;
-        }
+    public boolean executeCommand(TurtleCommand command) {
+        command.execute(this);
+        drawable.redraw();
+        return true;
     }
 
-    public void turnRight(int angulo) {
-        address += angulo;
-        if (address >= 360) {
-            address -= 360;
-        }
+    public void move(Point newpoint) {
+        pastPoint = actualPoint;
+        actualPoint = newpoint;
+        lines.add(new Line(pastPoint, actualPoint, color)); // Almacenar la línea en la lista
     }
 
-    public void retroceder(int distancia) {
-        double radianes = Math.toRadians(address);
-        int newX = x - (int) (distancia * Math.cos(radianes));
-        int newY = y - (int) (distancia * Math.sin(radianes));
-        x = x2;
-        y = y2;
-        x2 = newX;
-        y2 = newY;
+    public void turn(int angle) {
+        address += angle;
     }
 
-    public void back(int distancia) {
-        double radianes = Math.toRadians(address);
-        int newX = x + (int) (distancia * Math.cos(radianes));
-        int newY = y + (int) (distancia * Math.sin(radianes));
-        x = x2;
-        y = y2;
-        x2 = newX;
-        y2 = newY;
-    }
-    
-    public void drawImage(Graphics g) {
+    public void draw(Graphics g) {
         try {
             image = ImageIO.read(new File("src\\co\\edu\\autonoma\\Resources\\turtle.png"));
-            g.drawImage(image, 0, 0, 64, 64, null);
+            // Borrar el área ocupada por la imagen anterior
+            g.clearRect(pastPoint.x, pastPoint.y, 64, 64);
+            g.drawImage(image, actualPoint.x, actualPoint.y, 64, 64, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        drawLines(g); // Llamar al método para dibujar todas las líneas almacenadas
     }
 
-    @Override
-    public void draw(Graphics g) {
-        this.g.setColor(color);
-        this.g.drawLine(x, y, x2, y2);
+   private void drawLines(Graphics g) {
+        for (Line line : lines) {
+            g.setColor(line.getColor());
+            g.drawLine(line.getStartPoint().x, line.getStartPoint().y, line.getEndPoint().x, line.getEndPoint().y);
+        }
+    }
+
+    public void changeColor(Color color) {
+        this.color = color;
     }
 }
