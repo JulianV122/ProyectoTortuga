@@ -13,9 +13,15 @@ import java.awt.Color;
  */
 public class SetColorInstruction extends Instruction {
     private Color color;
+    private String lineColor;
+
+    public SetColorInstruction() {
+        super("SetColor");
+    }
     
     public void setColor(String lineColor){
         lineColor = lineColor.toUpperCase();
+        this.lineColor = lineColor;
         switch (lineColor) {
             case "BLACK" -> color = Color.BLACK;
             case "BLUE" -> color = Color.BLUE;
@@ -38,5 +44,10 @@ public class SetColorInstruction extends Instruction {
     @Override
     public void execute(Turtle turtle) {
         turtle.color = color;
+    }
+
+    @Override
+    public String getParameter() {
+        return lineColor;
     }
 }

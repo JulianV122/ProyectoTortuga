@@ -5,63 +5,51 @@
 package co.edu.autonoma.elementos;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author Julian
  */
-public class Lector {
-    private RandomAccessFile archive;
+public class Lector extends JFrame {
     
     public Lector() {
     }
 
-//    public void load() {
-//        try {
-//            if(this.archive.length() != 0) {
-//                loadArchive();
-//                read();
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
     
-    public void loadArchive() throws FileNotFoundException {
-        try {
-            this.archive = new RandomAccessFile("src\\co\\edu\\autonoma\\elementos\\Logo.txt", "r");
-        } catch (Exception e) {
-            this.archive = new RandomAccessFile("src\\co\\edu\\autonoma\\elementos\\Logo.txt", "rw");
+     public String searchFile() {
+        File fileName = null;
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("TXT files", "txt");
+        fileChooser.setFileFilter(txtFilter);
+        int result = fileChooser.showOpenDialog(this);
+        if (result != JFileChooser.CANCEL_OPTION) {
+            fileName = fileChooser.getSelectedFile();
+            return fileName.getPath();
         }
+        return null;
     }
 
-    public void save() {}
-
-//    public void read() {
-//        Charset charset = StandardCharsets.UTF_8;
-//        try (BufferedReader reader = Files.newBufferedReader((Path) archive, charset)) {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                System.out.println(line);
-//                coordinador.proccessData(line);
-//            }
-//        } catch (IOException x) {
-//            System.err.format("IOException: %s%n", x);
-//        }
-//    }
-    
-//    public void read(String text){
-//        coordinador.proccessData(text);
-//    }
-    
-
-    public void extractData() {}
-}
+     public LinkedList readFile() {
+        String file = searchFile();
+        LinkedList <String> instrucciones = new LinkedList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                instrucciones.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("No se ha podido leer el archivo" + e.getMessage());
+        }
+        return instrucciones;
+    }
+     
+    }

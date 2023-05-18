@@ -4,29 +4,35 @@
  */
 package co.edu.autonoma.GUI;
 
+import co.edu.autonoma.Instructions.Instruction;
 import co.edu.autonoma.elementos.Coordinator;
 import co.edu.autonoma.elementos.Drawable;
+import co.edu.autonoma.elementos.Fillable;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author Julian
  */
-public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
+public class InterfazGrafica extends javax.swing.JFrame implements Drawable,Fillable {
     private Coordinator coordinator;
+    DefaultListModel<String> modelo;
     /**
      * Creates new form Interfaz
      */
     public InterfazGrafica() {
         setLayout(new BorderLayout());
         initComponents();
+        modelo = new DefaultListModel<>();
         
     }
     
     
     public void setCoordinator(Coordinator coordinator){
         this.coordinator = coordinator;
+        coordinator.setDrawable(this);
     }
     
     @Override
@@ -79,11 +85,6 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
             }
         });
 
-        InstructionsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(InstructionsList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,8 +132,6 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     private void btIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniciarActionPerformed
         String data = Instructionstxt.getText();
         coordinator.proccessData(data);
-        
-        repaint();
     }//GEN-LAST:event_btIniciarActionPerformed
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
@@ -145,10 +144,10 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
      */
     public static void main(String args[]) {
         InterfazGrafica interfaz = new InterfazGrafica();
-        //Beach beach = new Beach(interfaz.getWidth(),interfaz.getHeight());
         Coordinator coordinator = new Coordinator(interfaz.getWidth(),interfaz.getHeight());
         
         interfaz.setCoordinator(coordinator);
+        coordinator.setFillable(interfaz);
         interfaz.setTitle("Turtle Game");
         interfaz.setVisible(true);
     }
@@ -165,4 +164,10 @@ public class InterfazGrafica extends javax.swing.JFrame implements Drawable {
     private javax.swing.JButton btLimpiar;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void fillList(Instruction instruccion) {
+        InstructionsList.setModel(modelo);
+        this.modelo.addElement(instruccion.getNameInstruction() + " "+ instruccion.getParameter());
+    }
 }

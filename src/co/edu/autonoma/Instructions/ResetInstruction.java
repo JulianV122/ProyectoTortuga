@@ -12,11 +12,20 @@ import co.edu.autonoma.elementos.Turtle;
  */
 public class ResetInstruction extends Instruction {
 
+    public ResetInstruction() {
+        super("Reset");
+    }
+
     @Override
     public void execute(Turtle turtle) {
         turtle.getTurtleLine().clear();
         turtle.setX(turtle.getInitialX());
         turtle.setY(turtle.getInitialY());
+    }
+
+    @Override
+    public String getParameter() {
+        return "";
     }
     
 }

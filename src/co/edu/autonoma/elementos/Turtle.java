@@ -7,6 +7,8 @@ package co.edu.autonoma.elementos;
 import co.edu.autonoma.Instructions.Instruction;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,9 +27,10 @@ public class Turtle extends Sprite {
     private LinkedList <TurtleLine> turtleLine; 
     private int initialX;
     private int initialY;
+    private Dimensionable dimensionable;
 
     public Turtle(int x, int y) {
-        super(x, y, 24, 24);
+        super(x, y, 64, 64);
         direction=0;
         initialX = x;
         initialY = y;
@@ -42,20 +45,25 @@ public class Turtle extends Sprite {
 
     public void executeInstruction(Instruction instruction){
         instruction.execute(this);
+        redraw();
     }
     
 
     @Override
     public void draw(Graphics g) {
-        try {
-            image = ImageIO.read(new File("src\\co\\edu\\autonoma\\Resources\\turtle.png"));
-            g.drawImage(image, x, y, 64, 64, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         for(TurtleLine line: turtleLine){
             line.draw(g);
         }
+        try {
+            image = ImageIO.read(new File("src\\co\\edu\\autonoma\\Resources\\turtle.png"));
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.translate(x, y);
+            AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(direction), width / 2, height / 2);
+            g2d.drawImage(image, tx, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     @Override
@@ -82,5 +90,13 @@ public class Turtle extends Sprite {
     public LinkedList getTurtleLine(){
         return turtleLine;
     }
-
+    
+    public Dimensionable getDimensionable(){
+        return dimensionable;
+    }
+    
+    public void setDimensionable(Dimensionable dimensionable){
+        this.dimensionable = dimensionable;
+    }
+    
 }

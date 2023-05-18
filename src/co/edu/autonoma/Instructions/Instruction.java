@@ -13,12 +13,21 @@ import java.util.ArrayList;
  */
 public abstract class Instruction {
     private ArrayList instructionHistory;
+    private String nameInstruction;
 
-    public Instruction() {
+    public Instruction(String nameInstruccion) {
         this.instructionHistory = new ArrayList();
+        this.nameInstruction = nameInstruccion;
     }
     
     public abstract void execute(Turtle turtle);
+
+    
+    public String getNameInstruction() {
+        return nameInstruction;
+    }
+    
+    public abstract String getParameter();
     
     
 }

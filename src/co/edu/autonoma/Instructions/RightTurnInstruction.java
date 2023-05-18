@@ -13,6 +13,10 @@ import co.edu.autonoma.elementos.Turtle;
  */
 public class RightTurnInstruction extends Instruction {
     private int degree;
+
+    public RightTurnInstruction() {
+        super("RightTurn");
+    }
     
     public void setDegree(int degree){
         this.degree = degree;
@@ -27,5 +31,10 @@ public class RightTurnInstruction extends Instruction {
         if (degree > 0) {
             turtle.setDirection(degree+turtle.getDirection());
         }
+    }
+
+    @Override
+    public String getParameter() {
+        return ""+degree;
     }
 }
